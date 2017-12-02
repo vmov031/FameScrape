@@ -19,5 +19,6 @@
   "homepage": "https://github.com/vmov031/FameScrape#readme",
   "dependencies": {
     "mysql": "^2.15.0"
-  }
+  },
+  "devDependencies": {}
 }
