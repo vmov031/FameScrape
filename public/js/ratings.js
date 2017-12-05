@@ -1,10 +1,22 @@
-var actorArray = ["Brad Pitt"]; 
+var request = require("request");
 
-var actorSearchUrl = "https://theimdbapi.org/api/find/person?name=brad+pitt"; 
+var nodeArgs = process.argv;
 
-console.log(actorSearchUrl);
+var actorName = "Brad Pitt"; 
+// Loop through all the words in the node argument
+// And do a little for-loop magic to handle the inclusion of "+"s
+for (var i = 2; i < nodeArgs.length; i++) {
+  if (i > 2 && i < nodeArgs.length) {
+    actorName = actorName + "+" + nodeArgs[i];
+  }
+  else {
+    actorName += nodeArgs[i];
+  }
+}
 
-request(actorSearchUrl, function(error, response, body) {
+var queryUrl = "https://theimdbapi.org/api/find/person?name=" + actorName; 
+
+request(queryUrl, function(error, response, body) {
 
   // If the request is successful
   if (!error && response.statusCode === 200) {
@@ -16,7 +28,6 @@ request(actorSearchUrl, function(error, response, body) {
 });
 
 //actor array counter
-var arrayCounter = actorArray.length + 1; 
 
 
 // Grabbing text the user typed into the search input
